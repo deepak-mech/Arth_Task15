@@ -1,0 +1,24 @@
+---
+# tasks file for webserver
+
+- name: "Install HTTPD"
+  package:
+          name: "httpd"
+          state: present
+
+- name: "Install php"
+  package:
+          name: "php"
+          state: present
+
+- name: "Copy Web Page"
+  copy:
+          src: "/index.php"
+          dest: "/var/www/html"
+  notify: Restart Web Service
+
+- name: "Start Httpd Service"
+  service:
+          name: "httpd"
+          state: started
+
